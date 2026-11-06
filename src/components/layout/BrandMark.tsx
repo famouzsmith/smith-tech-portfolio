@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/data/site";
 
@@ -8,13 +9,16 @@ export default function BrandMark() {
       aria-label={`${site.brand} home`}
       className="inline-flex items-center gap-3 rounded-xl"
     >
-      <span
-        aria-hidden="true"
-        className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-accent-strong to-accent-deep text-xs font-extrabold tracking-wider text-white shadow-sm sm:h-11 sm:w-11"
-      >
-        ST
-      </span>
-      <span className="flex flex-col">
+      <Image
+        src="/images/profile/main-logo-web.jpg"
+        alt={`${site.brand} logo`}
+        width={400}
+        height={400}
+        preload
+        sizes="(min-width: 640px) 48px, 44px"
+        className="h-11 w-11 shrink-0 rounded-xl object-contain sm:h-12 sm:w-12"
+      />
+      <span className="flex min-w-0 flex-col">
         <span className="text-sm font-extrabold tracking-[0.16em] text-ink sm:text-base">
           {site.brand}
         </span>
