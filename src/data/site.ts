@@ -1,4 +1,4 @@
-export type ProjectCategory = "web" | "graphics" | "printing";
+export type ProjectCategory = "web" | "graphics" | "support";
 
 export type ProjectFilter = "all" | ProjectCategory;
 
@@ -40,9 +40,12 @@ export type ExperienceItem = {
   period?: string;
 };
 
+export type AboutCardIcon = "web" | "branding" | "support" | "leadership";
+
 export type AboutCard = {
   title: string;
   description: string;
+  icon: AboutCardIcon;
 };
 
 export type EducationItem = {
@@ -130,20 +133,20 @@ export type SiteConfig = {
 export const categoryLabels: Record<ProjectCategory, string> = {
   web: "Web Dev",
   graphics: "Graphics",
-  printing: "Printing",
+  support: "Technical Support",
 };
 
 export const categoryFilters = [
   { value: "all", label: "All" },
   { value: "web", label: "Web Dev" },
   { value: "graphics", label: "Graphics" },
-  { value: "printing", label: "Printing" },
+  { value: "support", label: "Technical Support" },
 ] as const satisfies ReadonlyArray<{ value: ProjectFilter; label: string }>;
 
 export const site = {
   name: "Smith Ishaku",
   brand: "SMITH TECH",
-  tagline: "Web · Graphics · Print",
+  tagline: "Web · Graphics · Technical Support",
   title: "Web Developer & Creative Designer",
   shortBio:
     "I connect digital products with physical branding — from the first line of code to the final printed flyer.",
@@ -194,6 +197,10 @@ export const site = {
         "Large Format Printing",
         "Online Registration Support",
         "Technical Support",
+        "Windows Installation",
+        "Windows Activation",
+        "Virus Detection & Removal",
+        "Software Updates",
       ],
     },
     {
@@ -291,7 +298,7 @@ export const site = {
     {
       slug: "event-flyer-campaign",
       title: "Event Flyer Campaign",
-      category: "printing",
+      category: "graphics",
       summary:
         "A bold flyer series built to communicate an event quickly and memorably.",
       description:
@@ -304,7 +311,7 @@ export const site = {
     {
       slug: "business-cards",
       title: "Business Cards",
-      category: "printing",
+      category: "graphics",
       summary:
         "A sharp, professional stationery set that makes a lasting first impression.",
       description:
@@ -317,7 +324,7 @@ export const site = {
     {
       slug: "large-format-banner",
       title: "Large Format Banner",
-      category: "printing",
+      category: "graphics",
       summary:
         "High-impact large format graphics designed to be read from a distance.",
       description:
@@ -365,16 +372,25 @@ export const site = {
     whatIDoTitle: "What I do",
     whatIDo: [
       {
-        title: "Web",
+        title: "Websites & Web Apps",
         description: "Websites and web apps.",
+        icon: "web",
       },
       {
         title: "Branding and Print",
         description: "Brand design and print work.",
+        icon: "branding",
+      },
+      {
+        title: "Technical Support",
+        description:
+          "Windows installation and activation, virus detection and removal, and software updates to keep your computer fast and secure.",
+        icon: "support",
       },
       {
         title: "Leadership",
         description: "Leading teams that get it done.",
+        icon: "leadership",
       },
     ],
     experienceTitle: "Experience",
