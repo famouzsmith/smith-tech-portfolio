@@ -113,6 +113,18 @@ export type SiteConfig = {
     buttonLabel: string;
     whatsappLabel: string;
   };
+  contactPage: {
+    eyebrow: string;
+    headline: string;
+    intro: string;
+    whatsappTitle: string;
+    whatsappLabel: string;
+    emailTitle: string;
+    socialsTitle: string;
+    cvLabel: string;
+    metaTitle: string;
+    metaDescription: string;
+  };
 };
 
 export const categoryLabels: Record<ProjectCategory, string> = {
@@ -137,7 +149,7 @@ export const site = {
     "I connect digital products with physical branding — from the first line of code to the final printed flyer.",
   bio: "I don't just write code — I build businesses. With over 2 years of experience, I bridge digital software and physical branding, from the first line of code to the final printed flyer. As Team Lead at Mind Upgrade Global Consult, I direct creative projects and guide teams to deliver excellence.",
   role: "Team Lead at Mind Upgrade Global Consult",
-  email: "hello@example.com",
+  email: "famouzsmith0@gmail.com",
   whatsapp: "https://wa.me/2347089906211",
   cvUrl: "/smith-ishaku-cv.pdf",
   profileImage: "/images/profile/smith-ishaku.jpg",
@@ -427,6 +439,20 @@ export const site = {
     heading: "Contact",
     buttonLabel: "Get in touch",
     whatsappLabel: "Message on WhatsApp",
+  },
+  contactPage: {
+    eyebrow: "Contact",
+    headline: "Let's work together",
+    intro:
+      "I'm open to web, design and print projects and job opportunities.",
+    whatsappTitle: "WhatsApp",
+    whatsappLabel: "Chat on WhatsApp",
+    emailTitle: "Email",
+    socialsTitle: "Socials",
+    cvLabel: "Download CV",
+    metaTitle: "Contact",
+    metaDescription:
+      "I'm open to web, design and print projects and job opportunities. Get in touch with Smith Ishaku.",
   },
   experience: [
     {
