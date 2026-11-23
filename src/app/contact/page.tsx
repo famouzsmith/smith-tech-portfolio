@@ -43,7 +43,7 @@ export default function ContactPage() {
               href={site.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 inline-flex w-fit items-center justify-center rounded-full bg-accent-strong px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-accent-deep sm:text-base"
+              className="mt-6 inline-flex min-h-11 w-fit items-center justify-center rounded-full bg-accent-strong px-5 py-2.5 text-base font-bold text-white shadow-sm transition-colors hover:bg-accent-deep"
             >
               {site.contactPage.whatsappLabel}
             </a>
@@ -55,7 +55,7 @@ export default function ContactPage() {
             </h2>
             <a
               href={`mailto:${site.email}`}
-              className="mt-6 break-all text-base font-semibold text-accent-deep transition-colors hover:text-accent-strong sm:text-lg"
+              className="mt-6 inline-flex min-h-11 items-center break-all text-base font-semibold text-accent-deep transition-colors hover:text-accent-strong sm:text-lg"
             >
               {site.email}
             </a>
@@ -76,11 +76,11 @@ export default function ContactPage() {
                   className="flex items-center justify-between gap-4 rounded-2xl border border-line bg-surface p-4 shadow-sm transition-colors hover:border-accent-strong hover:bg-accent-soft"
                 >
                   <span>
-                    <span className="block text-sm font-bold text-ink">
+                    <span className="block break-words text-base font-bold text-ink sm:text-sm">
                       {social.name}
                     </span>
                     {social.handle ? (
-                      <span className="mt-0.5 block text-sm text-muted">
+                      <span className="mt-0.5 block break-words text-base text-muted sm:text-sm">
                         {social.handle}
                       </span>
                     ) : null}
@@ -107,7 +107,7 @@ export default function ContactPage() {
           <a
             href={site.cvUrl}
             download
-            className="inline-flex items-center justify-center rounded-full border border-line bg-surface px-4 py-2 text-sm font-bold text-ink transition-colors hover:border-accent-strong hover:bg-accent-soft hover:text-accent-deep"
+            className="inline-flex min-h-11 items-center justify-center rounded-full border border-line bg-surface px-4 py-2 text-base font-bold text-ink transition-colors hover:border-accent-strong hover:bg-accent-soft hover:text-accent-deep"
           >
             {site.contactPage.cvLabel}
           </a>

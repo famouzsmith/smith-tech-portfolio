@@ -99,7 +99,7 @@ export default function SocialLinks({ className = "" }: SocialLinksProps) {
                 : social.name
             }
             title={social.name}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-canvas text-ink transition-colors hover:border-accent-strong hover:bg-accent-soft hover:text-accent-deep"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line bg-canvas text-ink transition-colors hover:border-accent-strong hover:bg-accent-soft hover:text-accent-deep"
           >
             <SocialIcon name={social.name} />
           </a>

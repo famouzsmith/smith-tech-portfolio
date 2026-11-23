@@ -18,28 +18,30 @@ export default function ProjectCard({
 }: ProjectCardProps) {
   const content = (
     <>
-      <div className="relative aspect-[4/5] w-full overflow-hidden rounded-xl bg-accent-soft">
+      <span className="relative block aspect-[4/5] w-full overflow-hidden rounded-xl border border-line bg-surface shadow-sm">
         <Image
           src={project.image}
           alt={project.imageAlt}
           fill
           loading="lazy"
-          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          sizes="(min-width: 1024px) 22rem, (min-width: 640px) 24rem, 17rem"
           className="object-contain p-2"
         />
-      </div>
+      </span>
 
-      <div className="mt-4 flex items-start justify-between gap-3">
-        <div>
-          <h3 className="text-lg font-bold tracking-tight text-ink">
+      <span className="mt-4 flex items-start justify-between gap-3">
+        <span className="min-w-0">
+          <span className="block text-lg font-bold tracking-tight text-ink">
             {project.title}
-          </h3>
-          <p className="mt-1 text-sm leading-6 text-muted">{project.summary}</p>
-        </div>
-        <span className="shrink-0 rounded-full bg-accent-soft px-3 py-1.5 text-xs font-semibold text-accent-deep">
+          </span>
+          <span className="mt-1 block break-words text-base leading-6 text-muted sm:text-sm">
+            {project.summary}
+          </span>
+        </span>
+        <span className="max-w-full shrink-0 break-words rounded-full bg-accent-soft px-3 py-1.5 text-xs font-semibold text-accent-deep">
           {categoryLabels[project.category]}
         </span>
-      </div>
+      </span>
     </>
   );
 

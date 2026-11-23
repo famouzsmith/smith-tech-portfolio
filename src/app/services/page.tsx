@@ -54,7 +54,7 @@ export default function ServicesPage() {
                   {service.skills.map((skill) => (
                     <li
                       key={skill}
-                      className="rounded-full bg-accent-soft px-3 py-1.5 text-xs font-semibold text-accent-deep"
+                      className="max-w-full break-words rounded-full bg-accent-soft px-3 py-1.5 text-xs font-semibold text-accent-deep"
                     >
                       {skill}
                     </li>

@@ -47,7 +47,7 @@ export default function ProjectsGallery() {
           {availableFilters.map((filter) => {
             const isActive = activeFilter === filter.value;
             const baseClassName =
-              "inline-flex items-center rounded-full border px-4 py-2 text-sm font-semibold transition-colors";
+              "inline-flex min-h-11 items-center rounded-full border px-4 py-2 text-base font-semibold transition-colors";
             const stateClassName = isActive
               ? "border-transparent bg-accent-soft text-accent-deep"
               : "border-line bg-surface text-muted hover:bg-canvas hover:text-ink";

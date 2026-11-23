@@ -40,9 +40,9 @@ export default function Header() {
   }, [isMenuOpen]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line/80 bg-surface/90 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-line/80 bg-surface/90 pt-safe-top backdrop-blur">
       <Container>
-        <div className="flex h-16 items-center justify-between gap-4 sm:h-20">
+        <div className="flex h-16 items-center justify-between gap-2 min-[360px]:gap-4 sm:h-20">
           <BrandMark />
 
           <nav aria-label="Main navigation" className="hidden md:block">
@@ -55,7 +55,7 @@ export default function Header() {
                     <Link
                       href={item.href}
                       aria-current={isActive ? "page" : undefined}
-                      className={`inline-flex items-center rounded-full px-3 py-2 text-sm font-semibold transition-colors lg:px-4 ${
+                      className={`inline-flex min-h-11 items-center rounded-full px-3 py-2 text-sm font-semibold transition-colors lg:px-4 ${
                         isActive
                           ? "bg-accent-soft text-accent-deep"
                           : "text-muted hover:bg-canvas hover:text-ink"
@@ -76,7 +76,7 @@ export default function Header() {
             aria-expanded={isMenuOpen}
             aria-controls="mobile-navigation"
             aria-label={isMenuOpen ? "Close main menu" : "Open main menu"}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-surface text-ink transition-colors hover:bg-canvas md:hidden"
+            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-line bg-surface text-ink transition-colors hover:bg-canvas md:hidden"
           >
             {isMenuOpen ? (
               <svg
@@ -110,7 +110,7 @@ export default function Header() {
       {isMenuOpen ? (
         <div
           id="mobile-navigation"
-          className="border-t border-line bg-surface md:hidden"
+          className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-line bg-surface md:hidden"
         >
           <Container className="py-4">
             <nav aria-label="Mobile navigation">
@@ -124,7 +124,7 @@ export default function Header() {
                         href={item.href}
                         onClick={() => setIsMenuOpen(false)}
                         aria-current={isActive ? "page" : undefined}
-                        className={`flex items-center justify-between rounded-xl px-4 py-3 text-base font-semibold transition-colors ${
+                        className={`flex min-h-11 items-center justify-between rounded-xl px-4 py-3 text-base font-semibold transition-colors ${
                           isActive
                             ? "bg-accent-soft text-accent-deep"
                             : "text-ink hover:bg-canvas"

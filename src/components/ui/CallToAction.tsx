@@ -17,7 +17,7 @@ export default function CallToAction() {
           <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-bold text-accent-deep shadow-sm transition-colors hover:bg-accent-soft focus-visible:outline-white sm:text-base"
+              className="inline-flex min-h-11 items-center justify-center rounded-full bg-white px-6 py-3 text-base font-bold text-accent-deep shadow-sm transition-colors hover:bg-accent-soft focus-visible:outline-white"
             >
               {site.contactCta.buttonLabel}
             </Link>
@@ -25,7 +25,7 @@ export default function CallToAction() {
               href={site.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full border border-white/40 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-white/10 focus-visible:outline-white sm:text-base"
+              className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/40 px-6 py-3 text-base font-bold text-white transition-colors hover:bg-white/10 focus-visible:outline-white"
             >
               {site.contactCta.whatsappLabel}
             </a>

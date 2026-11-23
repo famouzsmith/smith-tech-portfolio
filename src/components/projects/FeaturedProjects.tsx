@@ -7,7 +7,7 @@ export default function FeaturedProjects() {
   const featuredProjects = site.projects.filter((project) => project.featured);
 
   return (
-    <section className="py-16 sm:py-20">
+    <section className="pb-16 pt-4 sm:pb-20 sm:pt-6">
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
@@ -21,7 +21,7 @@ export default function FeaturedProjects() {
 
           <Link
             href="/projects"
-            className="inline-flex items-center justify-center rounded-full border border-line bg-surface px-6 py-3 text-sm font-bold text-ink transition-colors hover:border-accent-strong hover:bg-accent-soft hover:text-accent-deep sm:text-base"
+            className="inline-flex min-h-11 items-center justify-center rounded-full border border-line bg-surface px-6 py-3 text-base font-bold text-ink transition-colors hover:border-accent-strong hover:bg-accent-soft hover:text-accent-deep"
           >
             View all projects
           </Link>

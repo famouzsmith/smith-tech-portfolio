@@ -60,12 +60,12 @@ export default function ProjectModal({
           onClose();
         }
       }}
-      className="m-auto max-h-[92vh] w-[min(92vw,72rem)] overflow-y-auto rounded-3xl border border-line bg-surface p-0 text-ink shadow-xl backdrop:bg-ink/60"
+      className="m-auto max-h-[92dvh] w-[min(92vw,72rem)] overflow-y-auto rounded-3xl border border-line bg-surface p-0 text-ink shadow-xl backdrop:bg-ink/60"
     >
       {project ? (
-        <div className="p-4 sm:p-6">
-          <div className="flex items-start justify-between gap-4">
-            <div>
+        <div className="p-4 pb-safe-modal sm:p-6">
+          <div className="sticky top-0 z-10 -mx-4 flex items-start justify-between gap-4 bg-surface px-4 pb-3 pt-4 sm:-mx-6 sm:px-6 sm:pt-6">
+            <div className="min-w-0">
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-accent-deep">
                 {categoryLabels[project.category]}
               </p>
@@ -98,8 +98,8 @@ export default function ProjectModal({
             </button>
           </div>
 
-          <div className="mt-5 flex justify-center rounded-2xl bg-accent-soft p-2 sm:p-4">
-            <div className="relative h-[60vh] max-h-[42rem] min-h-[18rem] w-full">
+          <div className="mt-5 flex justify-center rounded-2xl border border-line bg-surface p-2 shadow-sm sm:p-4">
+            <div className="relative h-[min(55dvh,30rem)] min-h-[12rem] w-full">
               <Image
                 src={project.image}
                 alt={project.imageAlt}
@@ -117,7 +117,7 @@ export default function ProjectModal({
             {project.tags.map((tag) => (
               <li
                 key={tag}
-                className="rounded-full bg-accent-soft px-3 py-1.5 text-xs font-semibold text-accent-deep"
+                className="max-w-full break-words rounded-full bg-accent-soft px-3 py-1.5 text-xs font-semibold text-accent-deep"
               >
                 {tag}
               </li>

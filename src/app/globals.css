@@ -74,3 +74,44 @@
     }
   }
 }
+
+@layer utilities {
+  .px-safe {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  .pt-safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .pb-safe-footer {
+    padding-bottom: calc(3rem + env(safe-area-inset-bottom));
+  }
+
+  .pb-safe-modal {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+
+  @media (min-width: 640px) {
+    .px-safe {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    .pb-safe-footer {
+      padding-bottom: calc(4rem + env(safe-area-inset-bottom));
+    }
+
+    .pb-safe-modal {
+      padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .px-safe {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+}

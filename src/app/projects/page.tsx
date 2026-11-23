@@ -18,9 +18,9 @@ export default function ProjectsPage() {
           <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-ink sm:text-5xl lg:text-6xl">
             Projects
           </h1>
-
-          <ProjectsGallery />
         </div>
+
+        <ProjectsGallery />
       </Container>
     </section>
   );

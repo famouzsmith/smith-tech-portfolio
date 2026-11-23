@@ -71,6 +71,10 @@ export type SiteConfig = {
   brand: string;
   tagline: string;
   title: string;
+  home: {
+    heroBadge: string;
+    heroIntro: string;
+  };
   shortBio: string;
   bio: string;
   role: string;
@@ -147,10 +151,15 @@ export const site = {
   name: "Smith Ishaku",
   brand: "SMITH TECH",
   tagline: "Web · Graphics · Technical Support",
-  title: "Web Developer & Creative Designer",
+  title: "Web Developer, Creative Designer & Technical Support",
+  home: {
+    heroBadge: "Founder, Smith Tech",
+    heroIntro:
+      "I build websites, design brands, and keep computers running, from the first line of code to Windows setup and virus removal.",
+  },
   shortBio:
-    "I connect digital products with physical branding — from the first line of code to the final printed flyer.",
-  bio: "I don't just write code — I build businesses. With over 2 years of experience, I bridge digital software and physical branding, from the first line of code to the final printed flyer. As Team Lead at Mind Upgrade Global Consult, I direct creative projects and guide teams to deliver excellence.",
+    "I connect digital products with physical branding from the first line of code to the final printed flyer.",
+  bio: "I don't just write code I build businesses. With over 2 years of experience, I bridge digital software and physical branding, from the first line of code to the final printed flyer. As Team Lead at Mind Upgrade Global Consult, I direct creative projects and guide teams to deliver excellence.",
   role: "Team Lead at Mind Upgrade Global Consult",
   email: "famouzsmith0@gmail.com",
   whatsapp: "https://wa.me/2347089906211",

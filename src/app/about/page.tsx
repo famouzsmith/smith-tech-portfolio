@@ -3,56 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import CallToAction from "@/components/ui/CallToAction";
 import Container from "@/components/ui/Container";
-import { site, type AboutCardIcon } from "@/data/site";
-
-function WhatIDoIcon({ icon }: { icon: AboutCardIcon }) {
-  const paths = {
-    web: (
-      <>
-        <circle cx="12" cy="12" r="9" />
-        <path d="M3 12h18" />
-        <path d="M12 3c2.5 2.5 4 5.5 4 9s-1.5 6.5-4 9c-2.5-2.5-4-5.5-4-9s1.5-6.5 4-9Z" />
-      </>
-    ),
-    branding: (
-      <>
-        <path d="M6 9V3h12v6" />
-        <path d="M6 18H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2" />
-        <rect x="6" y="14" width="12" height="7" rx="1" />
-      </>
-    ),
-    support: (
-      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
-    ),
-    leadership: (
-      <>
-        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-      </>
-    ),
-  };
-
-  return (
-    <span
-      aria-hidden="true"
-      className="grid h-10 w-10 place-items-center rounded-xl bg-accent-soft text-accent-deep"
-    >
-      <svg
-        className="h-5 w-5"
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        viewBox="0 0 24 24"
-      >
-        {paths[icon]}
-      </svg>
-    </span>
-  );
-}
+import WhatIDoIcon from "@/components/ui/WhatIDoIcon";
+import { site } from "@/data/site";
 
 export const metadata: Metadata = {
   title: site.about.metaTitle,
@@ -89,13 +41,13 @@ export default function AboutPage() {
                 <a
                   href={site.cvUrl}
                   download
-                  className="inline-flex items-center justify-center rounded-full bg-accent-strong px-6 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-accent-deep sm:text-base"
+                  className="inline-flex min-h-11 items-center justify-center rounded-full bg-accent-strong px-6 py-3 text-base font-bold text-white shadow-sm transition-colors hover:bg-accent-deep sm:text-base"
                 >
                   {site.about.cvLabel}
                 </a>
                 <Link
                   href="/services"
-                  className="inline-flex items-center justify-center rounded-full border border-line bg-surface px-6 py-3 text-sm font-bold text-ink transition-colors hover:border-accent-strong hover:bg-accent-soft hover:text-accent-deep sm:text-base"
+                  className="inline-flex min-h-11 items-center justify-center rounded-full border border-line bg-surface px-6 py-3 text-base font-bold text-ink transition-colors hover:border-accent-strong hover:bg-accent-soft hover:text-accent-deep sm:text-base"
                 >
                   {site.about.servicesLabel}
                 </Link>
@@ -111,7 +63,7 @@ export default function AboutPage() {
                     width={864}
                     height={1080}
                     preload
-                    sizes="(max-width: 1024px) 100vw, 40vw"
+                    sizes="(min-width: 1024px) 40vw, (min-width: 640px) 24rem, 20rem"
                     className="h-auto w-full object-cover"
                   />
                 </div>
@@ -136,7 +88,7 @@ export default function AboutPage() {
                 <h3 className="mt-4 text-lg font-bold text-ink">
                   {item.title}
                 </h3>
-                <p className="mt-2 text-sm leading-6 text-muted">
+                <p className="mt-2 text-base leading-6 text-muted sm:text-sm">
                   {item.description}
                 </p>
               </article>
@@ -172,17 +124,17 @@ export default function AboutPage() {
                         <h3 className="text-lg font-bold text-ink">
                           {item.role}
                         </h3>
-                        <p className="mt-1 text-sm font-semibold text-accent-deep">
+                        <p className="mt-1 text-base font-semibold text-accent-deep sm:text-sm">
                           {item.company}
                         </p>
                         {item.location ? (
-                          <p className="mt-1 text-sm text-muted">
+                          <p className="mt-1 text-base text-muted sm:text-sm">
                             {item.location}
                           </p>
                         ) : null}
                       </div>
                       {item.period ? (
-                        <span className="w-fit shrink-0 rounded-full bg-accent-soft px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-accent-deep">
+                        <span className="max-w-full break-words rounded-full bg-accent-soft px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-accent-deep">
                           {item.period}
                         </span>
                       ) : null}
@@ -214,7 +166,7 @@ export default function AboutPage() {
                     className="rounded-xl bg-canvas p-4"
                   >
                     <p className="font-bold text-ink">{item.degree}</p>
-                    <p className="mt-1 text-sm font-semibold text-accent-deep">
+                    <p className="mt-1 text-base font-semibold text-accent-deep sm:text-sm">
                       {item.year}
                     </p>
                   </li>
@@ -233,7 +185,7 @@ export default function AboutPage() {
                     className="rounded-xl bg-canvas p-4"
                   >
                     <p className="font-bold text-ink">{item.role}</p>
-                    <p className="mt-1 text-sm text-muted">
+                    <p className="mt-1 text-base text-muted sm:text-sm">
                       {item.organization}
                     </p>
                   </li>

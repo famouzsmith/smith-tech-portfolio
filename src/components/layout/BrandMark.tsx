@@ -7,7 +7,7 @@ export default function BrandMark() {
     <Link
       href="/"
       aria-label={`${site.brand} home`}
-      className="inline-flex items-center gap-3 rounded-xl"
+      className="inline-flex min-w-0 items-center gap-3 rounded-xl"
     >
       <Image
         src="/images/profile/main-logo-web.jpg"
@@ -22,7 +22,7 @@ export default function BrandMark() {
         <span className="text-sm font-extrabold tracking-[0.16em] text-ink sm:text-base">
           {site.brand}
         </span>
-        <span className="mt-0.5 text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-muted sm:text-[0.65rem]">
+        <span className="mt-0.5 hidden text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-muted min-[360px]:block sm:text-[0.65rem]">
           {site.tagline}
         </span>
       </span>
