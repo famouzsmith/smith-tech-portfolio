@@ -2,6 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 import sharp from "sharp";
 
+sharp.cache(false);
+
 const root = process.cwd();
 const sourceDir = path.join(root, "new-work");
 const doneDir = path.join(sourceDir, "done");
@@ -10,6 +12,9 @@ const allowedExtensions = new Set([".png", ".jpg", ".jpeg", ".webp"]);
 const maxWidth = 1600;
 const quality = 80;
 const warnBytes = 409_600;
+const retryCodes = new Set(["EBUSY", "EPERM", "EACCES"]);
+const maxRetries = 5;
+const retryDelayMs = 300;
 
 function slugify(value) {
   return (
@@ -39,6 +44,64 @@ function formatKb(bytes) {
   return `${(bytes / 1024).toFixed(1)} KB`;
 }
 
+function wait(milliseconds) {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+}
+
+function isRetriableFsError(error) {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "code" in error &&
+    retryCodes.has(error.code)
+  );
+}
+
+function errorMessage(error) {
+  return error instanceof Error ? error.message : String(error);
+}
+
+async function retryFsAction(action) {
+  let lastError;
+
+  for (let attempt = 0; attempt <= maxRetries; attempt += 1) {
+    try {
+      return await action();
+    } catch (error) {
+      lastError = error;
+
+      if (!isRetriableFsError(error) || attempt === maxRetries) {
+        break;
+      }
+
+      await wait(retryDelayMs);
+    }
+  }
+
+  throw lastError;
+}
+
+async function moveOriginal(inputPath, doneDir, fileName, inputExtension) {
+  const originalBase = path.basename(fileName, inputExtension);
+  const doneName = withSuffix(originalBase, inputExtension, (name) =>
+    fs.existsSync(path.join(doneDir, name)),
+  );
+  const donePath = path.join(doneDir, doneName);
+
+  try {
+    await retryFsAction(() => fs.promises.rename(inputPath, donePath));
+    return { moved: true, doneName };
+  } catch (renameError) {
+    try {
+      await retryFsAction(() => fs.promises.copyFile(inputPath, donePath));
+      await retryFsAction(() => fs.promises.unlink(inputPath));
+      return { moved: true, doneName };
+    } catch (fallbackError) {
+      return { moved: false, doneName, error: fallbackError, renameError };
+    }
+  }
+}
+
 fs.mkdirSync(sourceDir, { recursive: true });
 fs.mkdirSync(doneDir, { recursive: true });
 fs.mkdirSync(outputDir, { recursive: true });
@@ -57,7 +120,7 @@ const files = fs
 if (files.length === 0) {
   console.log("No new images found in new-work/.");
 } else {
-  const results = [];
+  const converted = [];
   const errors = [];
 
   for (const fileName of files) {
@@ -66,13 +129,14 @@ if (files.length === 0) {
     const originalBase = path.basename(fileName, inputExtension);
 
     try {
+      const inputBuffer = await fs.promises.readFile(inputPath);
       const outputBase = slugify(originalBase);
       const outputName = withSuffix(outputBase, ".webp", (name) =>
         fs.existsSync(path.join(outputDir, name)),
       );
       const outputPath = path.join(outputDir, outputName);
 
-      await sharp(inputPath)
+      await sharp(inputBuffer)
         .rotate()
         .resize({
           width: maxWidth,
@@ -83,32 +147,59 @@ if (files.length === 0) {
         .toFile(outputPath);
 
       const size = fs.statSync(outputPath).size;
-
-      results.push({ outputName, size });
-
-      const doneName = withSuffix(originalBase, inputExtension, (name) =>
-        fs.existsSync(path.join(doneDir, name)),
+      const move = await moveOriginal(
+        inputPath,
+        doneDir,
+        fileName,
+        inputExtension,
       );
 
-      fs.renameSync(inputPath, path.join(doneDir, doneName));
+      converted.push({
+        fileName,
+        outputName,
+        size,
+        moved: move.moved,
+        moveError: move.moved ? null : move.error,
+      });
     } catch (error) {
       errors.push({
         fileName,
-        message: error instanceof Error ? error.message : String(error),
+        message: errorMessage(error),
       });
     }
   }
 
-  const total = results.reduce((sum, item) => sum + item.size, 0);
+  const total = converted.reduce((sum, item) => sum + item.size, 0);
+  const movedCount = converted.filter((item) => item.moved).length;
+  const moveProblems = converted.filter((item) => !item.moved);
 
-  console.log(`Processed ${results.length} image(s):`);
+  console.log(`Converted ${converted.length} image(s):`);
 
-  for (const item of results) {
+  for (const item of converted) {
     const warning = item.size > warnBytes ? " [WARN over 400 KB]" : "";
-    console.log(`- ${item.outputName} — ${formatKb(item.size)}${warning}`);
+    const problem = item.moved ? "" : " [move failed — see problem below]";
+    console.log(`- ${item.outputName} — ${formatKb(item.size)}${warning}${problem}`);
   }
 
+  console.log(`Moved ${movedCount} original(s) to new-work/done/.`);
   console.log(`Total: ${formatKb(total)}`);
+
+  if (moveProblems.length > 0) {
+    console.log("Move problems:");
+
+    for (const item of moveProblems) {
+      console.log(`- ${item.fileName} is still in new-work/${item.fileName}.`);
+      console.log(
+        `  Converted copy already exists at public/images/projects/${item.outputName}.`,
+      );
+      console.log(
+        "  Do not run the script on it again until you move or remove the original.",
+      );
+      console.log(`  Reason: ${errorMessage(item.moveError)}`);
+    }
+
+    process.exitCode = 1;
+  }
 
   if (errors.length > 0) {
     console.log("Errors:");
