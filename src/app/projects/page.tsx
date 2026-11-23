@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import ProjectsGallery from "@/components/projects/ProjectsGallery";
 import Container from "@/components/ui/Container";
 
 export const metadata: Metadata = {
   title: "Projects",
-  description: "Projects are coming soon.",
+  description: "Selected graphic design projects.",
 };
 
 export default function ProjectsPage() {
@@ -18,9 +19,7 @@ export default function ProjectsPage() {
             Projects
           </h1>
 
-          <div className="mt-8 max-w-xl rounded-2xl border border-line bg-surface p-6 shadow-sm sm:p-8">
-            <p className="leading-7 text-muted">Projects are coming soon</p>
-          </div>
+          <ProjectsGallery />
         </div>
       </Container>
     </section>

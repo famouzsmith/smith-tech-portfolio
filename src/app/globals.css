@@ -46,6 +46,10 @@
     color: var(--ink);
   }
 
+  html[data-modal-open="true"] {
+    overflow: hidden;
+  }
+
   ::selection {
     background-color: var(--accent);
     color: var(--ink);
