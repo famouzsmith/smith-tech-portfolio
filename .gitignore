@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local original artwork for add-work script
+/new-work/*
+!/new-work/.gitkeep
+!/new-work/README.md
+!/new-work/done/
+/new-work/done/*
+!/new-work/done/.gitkeep
